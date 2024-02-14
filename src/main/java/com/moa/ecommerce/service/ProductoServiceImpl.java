@@ -30,8 +30,7 @@ public class ProductoServiceImpl implements ProductoService{
 	@Override
 	public void update(Producto producto) {
 		// TODO Auto-generated method stub
-		productoRepository.save(producto);
-		
+		productoRepository.save(producto);		
 	}
 
 	@Override
