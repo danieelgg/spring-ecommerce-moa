@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.moa.ecommerce.model.DetalleOrden;
 import com.moa.ecommerce.model.Orden;
 import com.moa.ecommerce.model.Producto;
+import com.moa.ecommerce.model.Usuario;
+import com.moa.ecommerce.service.IUsuarioService;
 import com.moa.ecommerce.service.ProductoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +31,10 @@ public class HomeController {
 	private final Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private ProductoService productoService ;
+	private ProductoService productoService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 	
 	//para almacenar los detalles de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -127,7 +132,13 @@ public class HomeController {
 	}
 	
 	@GetMapping("/order")
-	public String order() {
+	public String order(Model model) {
+		
+		Usuario usuario = usuarioService.findById(1).get();
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario",usuario);
 		return "usuario/resumenorden";
 	}
 	
