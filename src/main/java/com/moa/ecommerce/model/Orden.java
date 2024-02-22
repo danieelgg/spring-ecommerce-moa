@@ -1,12 +1,14 @@
 package com.moa.ecommerce.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -25,8 +27,9 @@ public class Orden {
 	@ManyToOne
 	private Usuario usuario;
 	
-	@OneToOne(mappedBy = "orden")
-	private DetalleOrden detalle;
+	//OneToOne / private DetalleOrden detalle; : cambio por comentario en video 39
+	@OneToMany(mappedBy = "orden")
+	private List<DetalleOrden> detalle;
 	
 	public Orden() {
 		
@@ -89,19 +92,22 @@ public class Orden {
 		this.usuario = usuario;
 	}
 
-	public DetalleOrden getDetalle() {
+	//Se eliminar los getters y setters y se generaron de nuevo : cambio por comentario en video 39
+	public List<DetalleOrden> getDetalle() {
 		return detalle;
 	}
 
-	public void setDetalle(DetalleOrden detalle) {
+	public void setDetalle(List<DetalleOrden> detalle) {
 		this.detalle = detalle;
-	}
-
+	}		
+	
 	@Override
 	public String toString() {
 		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
 				+ fechaRecibida + ", total=" + total + "]";
-	}	
+	}
+
+	
 	
 	
 }

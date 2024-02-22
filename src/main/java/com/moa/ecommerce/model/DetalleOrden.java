@@ -19,7 +19,8 @@ public class DetalleOrden {
 	private double precio;
 	private double total;
 	
-	@OneToOne
+	//OneToOne : cambio por comentario en video 39
+	@ManyToOne
 	private Orden orden;
 	
 	@ManyToOne
